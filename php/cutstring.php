@@ -63,4 +63,9 @@ class HtmlCutString{
   }
 }
 
+function cut_html_string($string, $limit){
+  $output = new HtmlCutString($string,$limit);
+  return $output->cut();
+}
+
 ?>
