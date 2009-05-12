@@ -9,7 +9,7 @@ if(typeof nsTEST == 'undefined'){
     nsTEST = {};
 }
 
-nsTEST.include = ['./cutstring_ie.js'];
+nsTEST.include = ['./cutstring.js'];
 
 nsTEST.cutString = inherit(WebTestCase);
 
@@ -79,6 +79,12 @@ nsTEST.cutString.prototype.testCutString11 = function(){
     var cutStr = output.cut();
     var cmpStr = '<span>aa<em>BB</em><ul><li>one</li><li>two</li></ul></span>';
     this.assertEqual(cmpStr,cutStr);
+};
+
+nsTEST.cutString.prototype.testCutHtmlStringdata11 = function(){
+    var output = cutHtmlString('<span>aa<em>BB</em><ul><li>one</li><li>two</li><li>three</li></ul></span>',10);
+    var cmpStr = '<span>aa<em>BB</em><ul><li>one</li><li>two</li></ul></span>';
+    this.assertEqual(cmpStr,output);
 };
 
 

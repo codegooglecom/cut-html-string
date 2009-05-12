@@ -62,3 +62,8 @@ CutString.prototype.searchEnd = function(parseDiv, newParent){
     }
     return false;
 };
+
+function cutHtmlString($string, $limit){
+    var output = new CutString($string,$limit);
+    return output.cut();
+}
