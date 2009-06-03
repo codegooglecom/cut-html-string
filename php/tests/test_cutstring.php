@@ -84,5 +84,12 @@ class TestCutstring extends UnitTestCase {
       $this->assertEqual("<span>aa<em>BB</em><ul>\n<li>one</li>\n<li>two</li>\n</ul></span>"."\n",$output);
     }
 
+    function testCutHtmlStringUtf8(){
+      $data = '<span>aa<em>åèö</em><ul><li>one</li><li>two</li><li>three</li></ul></span>';
+      $output = cut_html_string($data,10);
+      // adding \n for the blocked elements. but this is not a big problem
+      $this->assertEqual("<span>aa<em>&aring;&egrave;&ouml;</em><ul>\n<li>one</li>\n<li>tw</li>\n</ul></span>"."\n",$output);
+    }
+
 
 }

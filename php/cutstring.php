@@ -5,12 +5,13 @@
 // version 1.0
 
 class HtmlCutString{
-  function __construct($string,$limit){
+  function __construct($string, $limit){
     // create dom element using the html string
     $this->tempDiv = new DomDocument;
     $this->tempDiv->loadXML('<div>'.$string.'</div>');
     // keep the characters count till now
     $this->charCount = 0;
+    $this->encoding = 'UTF-8';
     // character limit need to check
     $this->limit = $limit;
   }
@@ -49,7 +50,7 @@ class HtmlCutString{
 	}
 
 	// the limit of the char count reached
-	if(strlen($ele->nodeValue) + $this->charCount >= $this->limit){
+	if(mb_strlen($ele->nodeValue,$this->encoding) + $this->charCount >= $this->limit){
 	  $newEle = $this->newDiv->importNode($ele);
 	    $newEle->nodeValue = substr($newEle->nodeValue,0, $this->limit - $this->charCount);
 	    $newParent->appendChild($newEle);
@@ -57,14 +58,14 @@ class HtmlCutString{
 	}
 	$newEle = $this->newDiv->importNode($ele);
 	$newParent->appendChild($newEle);
-	$this->charCount += strlen($newEle->nodeValue);
+	$this->charCount += mb_strlen($newEle->nodeValue,$this->encoding);
     }
     return false;
   }
 }
 
 function cut_html_string($string, $limit){
-  $output = new HtmlCutString($string,$limit);
+  $output = new HtmlCutString($string, $limit);
   return $output->cut();
 }
 
