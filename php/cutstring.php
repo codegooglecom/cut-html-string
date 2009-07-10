@@ -41,12 +41,12 @@ class HtmlCutString{
 	  }
 	  $this->deleteChildren($newEle);
 	  $newParent->appendChild($newEle);
-	    $res = $this->searchEnd($ele,$newEle);
-	    if($res)
-		return $res;
-	    else{
-		continue;
-	    }
+	  $res = $this->searchEnd($ele,$newEle);
+	  if($res)
+	    return $res;
+	  else{
+	    continue;
+	  }
 	}
 
 	// the limit of the char count reached
