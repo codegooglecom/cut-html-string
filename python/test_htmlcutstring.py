@@ -1,4 +1,4 @@
-from cutstring import HtmlCutString, cutHtmlString
+from htmlcutstring import HtmlCutString, cutHtmlString
 
 import unittest
 
