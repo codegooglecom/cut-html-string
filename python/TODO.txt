@@ -1,0 +1,3 @@
+1.create package support
+2.support for utf-8 characters
+3.Make it available in the python packages site
