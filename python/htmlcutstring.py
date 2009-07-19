@@ -1,14 +1,18 @@
-# This class is used to cut the string which is having html tags. 
+# This package is used to cut the string which is having html tags. 
 # It does not count the html tags, it just count the string inside tags and keeps
 # the tags as it is.
 
-# ex: If the string is "welcome to <b>JS World</b> <br> JS is bla". and If we want to cut the string of 12 charaters then output will be "welcome to <b>JS</b>". 
+# ex: If the string is "welcome to <b>Python World</b> <br> Python is bla". and If we want to cut the string of 16 charaters then output will be "welcome to <b>Python</b>". 
 
 # Here while cutting the string it keeps the tags for the cutting string and skip the rest and without distorbing the div structure.
 
-# USAGE:
-#  var obj = new cutString("welcome to <b>JS World</b> <br> JS is",12);
-#  var newCutString = obj.cut();
+# USAGE1:
+#  obj = HtmlCutString("welcome to <b>Python World</b> <br> Python is",16)
+#  newCutString = obj.cut()
+
+# USAGE2:
+#  newCutString = cutHtmlString("welcome to <b>Python World</b> <br> Python is",16)
+
 
 from xml.dom.minidom import getDOMImplementation
 from xml.dom.minidom import parseString
