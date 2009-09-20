@@ -1,8 +1,9 @@
-# This package is used to cut the string which is having html tags. 
+# This package is used to cut the string which is having html tags.
 # It does not count the html tags, it just count the string inside tags and keeps
 # the tags as it is.
+# Patched by Hedger to support utf-8 strings
 
-# ex: If the string is "welcome to <b>Python World</b> <br> Python is bla". and If we want to cut the string of 16 charaters then output will be "welcome to <b>Python</b>". 
+# ex: If the string is "welcome to <b>Python World</b> <br> Python is bla". and If we want to cut the string of 16 charaters then output will be "welcome to <b>Python</b>".
 
 # Here while cutting the string it keeps the tags for the cutting string and skip the rest and without distorbing the div structure.
 
@@ -19,9 +20,9 @@ from xml.dom.minidom import parseString
 
 class HtmlCutString():
 
-    def __init__(self,string, limit):
+    def __init__(self, string, limit):
         # temparary node to parse the html tags in the string
-        self.tempDiv = parseString('<div>'+string+'</div>');
+        self.tempDiv = parseString('<div>' + string.encode("utf-8") + '</div>');
         # while parsing text no of characters parsed
         self.charCount = 0
         self.limit = limit
@@ -34,17 +35,16 @@ class HtmlCutString():
 
         self.searchEnd(self.tempDiv, newDiv)
         # removeng some_tag that we added above
-        newContent = newDiv.firstChild.toxml('utf-8')
+        newContent = newDiv.firstChild.toxml()
         # removing div tag that we added in the __init__
         return newContent[5:-6]
 
-    def deleteChildren(self,node):
+    def deleteChildren(self, node):
         while node.firstChild:
             self.deleteChildren(node.firstChild)
             node.removeChild(node.firstChild)
-             
-  
-    def searchEnd(self,parseDiv, newParent):
+
+    def searchEnd(self, parseDiv, newParent):
         for ele in parseDiv.childNodes:
             # not text node
             if ele.nodeType != 3:
@@ -53,7 +53,7 @@ class HtmlCutString():
                 if len(ele.childNodes) == 0:
                     continue
                 self.deleteChildren(newEle)
-                res = self.searchEnd(ele,newEle)
+                res = self.searchEnd(ele, newEle)
                 if res :
                     return res
                 else:
@@ -72,8 +72,8 @@ class HtmlCutString():
             self.charCount += len(ele.nodeValue)
 
         return False
-    
+
 def cutHtmlString(string, limit):
-    output = HtmlCutString(string,limit)
+    output = HtmlCutString(string, limit)
     return output.cut()
 
