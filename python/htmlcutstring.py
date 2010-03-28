@@ -18,7 +18,7 @@
 from xml.dom.minidom import getDOMImplementation
 from xml.dom.minidom import parseString
 
-class HtmlCutString():
+class HtmlCutString(object):
 
     def __init__(self, string, limit):
         # temparary node to parse the html tags in the string
